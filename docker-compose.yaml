@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  elasticmq:
+    container_name: elasticmq
+    image: softwaremill/elasticmq-native:1.4.4
+    ports:
+      - 9324:9324
+      - 9325:9325
+  nodejs:
+    container_name: nodejs
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      TZ: Asia/Tokyo
+      AWS_SDK_LOAD_CONFIG: 1
+    volumes:
+        - ~/.aws/:/root/.aws:ro
+  mysql:
+    image: mysql:8.0.29
+    platform: linux/x86_64
+    ports:
+      - 8100:8100
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
