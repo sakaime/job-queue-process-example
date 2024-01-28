@@ -10,16 +10,16 @@ bin/purge-queue.sh
 bin/rebuild-db.sh
 
 ## コンテナをリビルドする
-docker-compose up --build -d
+docker compose up --build -d
 
 ## データベースのコンテナに入ってテーブルを確認する
-docker-compose exec mysql bash
+docker compose exec mysql bash
 mysql -uroot -prootpassword
 (中略)
 select * from greetings;
 
 ## Node.jsのコンテナに入る
-docker-compose exec nodejs bash
+docker compose exec nodejs bash
 
 ### Workerのプロセスを確認する
 pm2 list
